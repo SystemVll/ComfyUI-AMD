@@ -1,4 +1,4 @@
-# 🚀 ComfyUI X AMD (Windows)
+# 🚀 ComfyUI x AMD (Windows)
 
 A streamlined PowerShell script to set up [ComfyUI](https://github.com/comfyanonymous/ComfyUI) with ROCm support for AMD RDNA graphics cards on Windows. Uses [UV](https://docs.astral.sh/uv/) for blazing-fast package management.
 
@@ -38,7 +38,7 @@ irm https://raw.githubusercontent.com/SystemVll/ComfyUI-AMD/main/ComfyUI-AMD.ps1
 1. **Download the script**:
    ```powershell
    git clone https://github.com/SystemVll/ComfyUI-AMD.git
-   cd YOUR_REPO
+   cd ComfyUI-AMD
    ```
 
 2. **Run the setup**:
