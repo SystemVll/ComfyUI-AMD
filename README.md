@@ -1,115 +1,129 @@
-# 🚀 ComfyUI x AMD (Windows)
+<h1 style="display: flex; align-items: center; gap: 10px;">
+  <img
+    src="https://github.com/user-attachments/assets/4a73e24c-1307-4dbc-b406-f8f84f94954f"
+    width="32"
+    alt="logo"
+  />
+  ComfyUI x AMD
+</h1>
 
-A streamlined PowerShell script to set up [ComfyUI](https://github.com/comfyanonymous/ComfyUI) with ROCm support for AMD RDNA graphics cards on Windows. Uses [UV](https://docs.astral.sh/uv/) for blazing-fast package management.
+A PowerShell script that sets up [ComfyUI](https://github.com/comfyanonymous/ComfyUI) with ROCm support for AMD RDNA GPUs on Windows. It uses [uv](https://docs.astral.sh/uv/) for fast and reliable Python package management.
 
-## ✨ Features
+## Features
 
-- 🎮 **Full AMD GPU Support**: RDNA 3, RDNA 3.5, and RDNA 4
-- ⚡ **Lightning Fast**: Uses UV for 10-100x faster package installation
-- 🔄 **Automatic Setup**: One command to rule them all
-- 💾 **Persistent Configuration**: Remembers your GPU settings
-- 🎨 **Beautiful CLI**: Colorful interface with helpful emojis
-- 🔧 **Zero Config**: Handles virtual environments, dependencies, and ROCm PyTorch automatically
+* Native AMD GPU support (RDNA 3, 3.5, and 4)
+* Fast installs using uv instead of pip
+* One-command setup
+* GPU configuration is saved between runs
+* Handles venvs, dependencies, and ROCm PyTorch automatically
 
-## 🎯 Supported GPUs
+## Supported GPUs
 
-| Generation | GPUs | Architecture |
-|------------|------|--------------|
-| 🔴 RDNA 3 | RX 7900 XTX, RX 7900 XT, RX 7800 XT, RX 7700 XT, RX 7600 | gfx1100 |
-| 🟣 RDNA 3.5 | Ryzen AI (Strix Point/Halo), Radeon 890M, 8060S | gfx1151 |
-| 🔵 RDNA 4 | RX 9070 XT, RX 9070 | gfx1200 |
+| Generation | GPUs                                                     | Architecture |
+| ---------- | -------------------------------------------------------- | ------------ |
+| RDNA 3     | RX 7900 XTX, RX 7900 XT, RX 7800 XT, RX 7700 XT, RX 7600 | gfx1100      |
+| RDNA 3.5   | Ryzen AI (Strix Point / Halo), Radeon 890M, 8060S        | gfx1151      |
+| RDNA 4     | RX 9070 XT, RX 9070                                      | gfx1200      |
 
-## 📋 Prerequisites
+## Prerequisites
 
-- **Windows 10/11** (64-bit)
-- **Git** ([Download](https://git-scm.com/downloads))
-- **PowerShell 5.1+** (included in Windows)
+* Windows 10 or 11 (64-bit)
+* Git ([download](https://git-scm.com/downloads))
+* PowerShell 5.1 or newer (already included with Windows)
 
-## ⚡ Quick Install
+## Quick Install
 
-Open PowerShell and run this one-liner:
+Open PowerShell and run:
 
 ```powershell
 irm https://raw.githubusercontent.com/SystemVll/ComfyUI-AMD/main/ComfyUI-AMD.ps1 | iex
 ```
 
-### Alternative: Manual Installation
+## Manual Installation
 
-1. **Download the script**:
+1. Clone the repository:
+
    ```powershell
    git clone https://github.com/SystemVll/ComfyUI-AMD.git
    cd ComfyUI-AMD
    ```
 
-2. **Run the setup**:
+2. Run the script:
+
    ```powershell
    .\ComfyUI-AMD.ps1
    ```
 
-## 🎬 What It Does
+## What the Script Does
 
-1. ✅ Installs UV (if not present)
-2. ✅ Clones ComfyUI repository
-3. ✅ Creates Python 3.12 virtual environment
-4. ✅ Installs ROCm PyTorch for your specific GPU
-5. ✅ Installs all ComfyUI dependencies
-6. ✅ Configures GPU settings (HIP_VISIBLE_DEVICES)
-7. ✅ Launches ComfyUI web interface
+* Installs uv if it isn’t already installed
+* Clones the ComfyUI repository
+* Creates a Python 3.12 virtual environment
+* Installs the correct ROCm PyTorch build for your GPU
+* Installs ComfyUI dependencies
+* Configures HIP_VISIBLE_DEVICES
+* Launches the ComfyUI web UI
 
-## 🔧 Configuration
+## Configuration
 
 ### GPU Selection
 
-On first run, you'll be prompted to select your GPU generation:
-- `1` - RDNA 3 (RX 7000 series)
-- `2` - RDNA 3.5 (Ryzen AI)
-- `3` - RDNA 4 (RX 9000 series)
+On the first run, you’ll be asked which GPU generation you’re using:
 
-Your choice is saved and reused on subsequent runs.
+* `1` – RDNA 3 (RX 7000 series)
+* `2` – RDNA 3.5 (Ryzen AI)
+* `3` – RDNA 4 (RX 9000 series)
+
+Your choice is saved and reused on future runs.
 
 ### Multi-GPU Systems
 
-If you have multiple GPUs, the script will ask you to configure `HIP_VISIBLE_DEVICES`:
-- `0` - First GPU
-- `1` - Second GPU
-- `0,1` - Use both GPUs
+If more than one GPU is detected, you’ll be prompted to set `HIP_VISIBLE_DEVICES`:
 
-## 📁 Directory Structure
+* `0` – first GPU
+* `1` – second GPU
+* `0,1` – use both
+
+## Directory Layout
 
 ```
 your-folder/
-├── setup.ps1                 # This setup script
-├── .gpu_config.json         # Saved GPU configuration
-└── ComfyUI/                 # ComfyUI installation
-    ├── .venv/               # Virtual environment
-    ├── models/              # Place your models here
-    ├── custom_nodes/        # Custom nodes
-    └── output/              # Generated images
+├── setup.ps1
+├── .gpu_config.json
+└── ComfyUI/
+    ├── .venv/
+    ├── models/
+    ├── custom_nodes/
+    └── output/
 ```
 
-## 🎨 Usage
+## Usage
 
 ### First Run
+
 ```powershell
 .\setup.ps1
 ```
-Select your GPU, configure settings, and ComfyUI will launch automatically.
 
-### Subsequent Runs
+Follow the prompts and ComfyUI will start automatically.
+
+### Later Runs
+
 ```powershell
 .\setup.ps1
 ```
-Just hit Enter through the prompts - your settings are remembered!
 
-### Access ComfyUI
-Once launched, open your browser to:
+You can usually just press Enter — your settings are reused.
+
+### Open ComfyUI
+
+Once running, open:
+
 ```
 http://127.0.0.1:8188
 ```
 
-## 🔄 Updating
-
-To update ComfyUI to the latest version:
+## Updating ComfyUI
 
 ```powershell
 cd ComfyUI
@@ -118,65 +132,53 @@ cd ..
 .\setup.ps1
 ```
 
-The script will handle any new dependencies automatically.
+Any new dependencies will be handled automatically.
 
-## 📦 What's UV?
+## About uv
 
-[UV](https://github.com/astral-sh/uv) is a modern, extremely fast Python package manager written in Rust. Benefits:
+[uv](https://github.com/astral-sh/uv) is a modern Python package manager written in Rust. Compared to pip, it’s significantly faster and tends to be more reliable, especially for large dependency trees.
 
-- ⚡ **10-100x faster** than pip
-- 🎯 Better dependency resolution
-- 💾 Efficient caching
-- 🔒 More reliable installations
+## Troubleshooting
 
-## 🐛 Troubleshooting
+### uv not found
 
-### "UV not found" after installation
-- Close and reopen your PowerShell terminal
-- Run the script again
+* Restart PowerShell and try again
 
-### "Execution policy" error
+### Execution policy error
+
 ```powershell
-Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
 ```
 
 ### GPU not detected
-- Ensure your AMD GPU drivers are up to date
-- Check that ROCm is supported on your GPU model
-- Try setting `HIP_VISIBLE_DEVICES=0` manually
 
-### ComfyUI won't start
-- Check that no other instance is running on port 8188
-- Look for error messages in the console
-- Try deleting `.venv` folder and running setup again
+* Update your AMD drivers
+* Verify your GPU supports ROCm
+* Try setting `HIP_VISIBLE_DEVICES=0` manually
 
-## 🔗 Useful Links
+### ComfyUI won’t start
 
-- [ComfyUI Documentation](https://github.com/comfyanonymous/ComfyUI)
-- [ROCm Documentation](https://rocm.docs.amd.com/)
-- [UV Documentation](https://docs.astral.sh/uv/)
-- [Model Downloads](https://huggingface.co/models)
+* Make sure port 8188 isn’t already in use
+* Check the console output for errors
+* Delete the `.venv` folder and rerun the script
 
-## 📝 Notes
+## Links
 
-- First installation may take 5-10 minutes depending on your internet speed
-- ROCm PyTorch builds are large (~2-3GB)
-- Models are not included - download them separately to `ComfyUI/models/`
+* ComfyUI: [https://github.com/comfyanonymous/ComfyUI](https://github.com/comfyanonymous/ComfyUI)
+* ROCm: [https://rocm.docs.amd.com/](https://rocm.docs.amd.com/)
+* uv: [https://docs.astral.sh/uv/](https://docs.astral.sh/uv/)
+* Models: [https://huggingface.co/models](https://huggingface.co/models)
 
-## 🤝 Contributing
+## Notes
 
-Found a bug? Have a suggestion? Open an issue or submit a PR!
+* First install can take a while, especially on slower connections
+* ROCm PyTorch wheels are large (2–3 GB)
+* Models are not included — place them in `ComfyUI/models/`
 
-## 📄 License
+## Contributing
 
-This setup script is provided as-is. ComfyUI has its own license - please refer to the [ComfyUI repository](https://github.com/comfyanonymous/ComfyUI) for details.
+Issues and pull requests are welcome.
 
-## ⭐ Credits
+## License
 
-- [ComfyUI](https://github.com/comfyanonymous/ComfyUI) - The amazing UI for Stable Diffusion
-- [UV](https://github.com/astral-sh/uv) - Modern Python package management
-- [AMD ROCm](https://www.amd.com/en/products/software/rocm.html) - GPU compute platform
-
----
-
-Made with ❤️ for the AMD + AI community
+This script is provided as-is. ComfyUI is licensed separately; see the ComfyUI repository for details.
